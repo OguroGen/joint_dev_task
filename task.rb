@@ -16,9 +16,10 @@ def q2
   array2 = ["bird", "bat", "tiger"]
 
   # 以下に回答を記載
-    array = []
+    #array = [] <=削除
     
-    array.concat(array1,array2)
+    #array.concat(array1,array2) <= 修正
+    array=array1+array2
 
     p array
 end
@@ -65,7 +66,8 @@ def q7
   array = ["1", "2", "3", "4", "5"]
 
   # 以下に回答を記載
-    array.map! {|s| s.to_i}
+    #array.map! {|s| s.to_i} <= 修正
+    array.map!(&:to_i)
 
   # 以下は変更しないで下さい
   p array
@@ -75,9 +77,11 @@ def q8
   programming_languages = %w(ruby php python javascript)
 
   # 以下に回答を記載
-    programming_languages.map!{|s| s.capitalize}
-    upper_case_programming_languages = programming_languages.map{|s| s.upcase}
-
+    #programming_languages.map!{|s| s.capitalize} <= 修正
+    #upper_case_programming_languages = programming_languages.map{|s| s.upcase} <=修正
+    programming_languages.map!(&:capitalize) 
+    upper_case_programming_languages = programming_languages.map(&:upcase)
+    
   # 以下は変更しないで下さい
   p programming_languages
   p upper_case_programming_languages
@@ -97,6 +101,13 @@ def q10
   foods = %w(いか たこ うに しゃけ うにぎり うに軍艦 うに丼)
 
   # 以下に回答を記載
+    foods.each{|food|
+        if food.include?("うに")
+            puts "#{food}は好物です"
+        else
+            puts "#{food}はまぁまぁ好きです"
+        end
+    }
 
 end
 
@@ -104,6 +115,7 @@ def q11
   sports = ["サッカー", "バスケ", "野球", ["フットサル", "野球"], "水泳", "ハンドボール", ["卓球", "サッカー", "ボルダリング"]]
 
   # 以下に回答を記載
+    puts sports.flatten!.uniq!
 
 end
 
@@ -111,7 +123,8 @@ def q12
   data = { user: { name: "satou", age: 33 } }
 
   # 以下に回答を記載
-
+    p data[:user][:name]
+    
 end
 
 def q13
@@ -119,6 +132,7 @@ def q13
   update_data = { age: 32, address: "沖縄" }
 
   # 以下に回答を記載
+    p user_data.update(update_data)
 
 end
 
@@ -126,6 +140,7 @@ def q14
   data = { name: "satou", age: 33, address: "saitama", hobby: "soccer", email: "hoge@fuga.com" }
 
   # 以下に回答を記載
+    p data_keys = data.keys
 
 end
 
@@ -134,7 +149,9 @@ def q15
   data2 = { name: "yamada", hobby: "baseball", role: "normal" }
 
   # 以下に回答を記載
-
+    puts data1.keys.include?(:age) ? "OK" : "NG" 
+    puts data2.keys.include?(:age) ? "OK" : "NG" 
+    
 end
 
 def q16
@@ -146,6 +163,9 @@ def q16
   ]
 
   # 以下に回答を記載
+    users.each{|user|
+        puts "私の名前は#{user[:name]}です。年齢は#{user[:age]}歳です。"
+    }
 
 end
 
