@@ -115,7 +115,12 @@ def q11
   sports = ["サッカー", "バスケ", "野球", ["フットサル", "野球"], "水泳", "ハンドボール", ["卓球", "サッカー", "ボルダリング"]]
 
   # 以下に回答を記載
-    puts sports.flatten!.uniq!
+    # puts sports.flatten!.uniq! <=修正
+    sports.flatten!.uniq!
+    
+    sports.each.with_index(1){|sport,i|
+        puts "No#{i} #{sport}"
+    }
 
 end
 
@@ -149,8 +154,10 @@ def q15
   data2 = { name: "yamada", hobby: "baseball", role: "normal" }
 
   # 以下に回答を記載
-    puts data1.keys.include?(:age) ? "OK" : "NG" 
-    puts data2.keys.include?(:age) ? "OK" : "NG" 
+    # puts data1.keys.include?(:age) ? "OK" : "NG"  <=修正
+    # puts data2.keys.include?(:age) ? "OK" : "NG"  <=修正
+    puts data1.key?(:age) ? "OK" : "NG" 
+    puts data2.key?(:age) ? "OK" : "NG" 
     
 end
 
@@ -171,7 +178,19 @@ end
 
 class UserQ17
   # 以下に回答を記載
-
+    def initialize(user_info)
+        @name = user_info[:name]
+        @age = user_info[:age]
+        @gender = user_info[:gender]
+        @admin = user_info[:admin]
+    end
+    
+    def info
+        puts "名前：#{@name}"
+        puts "年齢：#{@age}"
+        puts "性別：#{@gender}"
+    end
+    
 end
 
 def q17
@@ -186,7 +205,18 @@ end
 
 class UserQ18
   # 以下に回答を記載
-
+    def initialize(user_info)
+        @name = user_info[:name]
+        @age = user_info[:age]
+    end
+    
+    def introduce
+        if @age >= 20
+            puts "こんにちは，#{@name}と申します。宜しくお願いいたします。"
+        else
+            puts "はいさいまいど〜，#{@name}です！！！"
+        end
+    end
 end
 
 def q18
@@ -202,8 +232,13 @@ class Item
   # 以下を修正して下さい
 
   def initialize(name)
-    @name = name
+    @name = name[:name]
   end
+    
+    def name
+        @name
+    end
+    
 end
 
 def q19
