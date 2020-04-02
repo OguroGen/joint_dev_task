@@ -178,7 +178,7 @@ end
 
 class UserQ17
   # 以下に回答を記載
-    def initialize(user_info)
+    def initialize(**user_info)
         @name = user_info[:name]
         @age = user_info[:age]
         @gender = user_info[:gender]
@@ -186,9 +186,11 @@ class UserQ17
     end
     
     def info
-        puts "名前：#{@name}"
-        puts "年齢：#{@age}"
-        puts "性別：#{@gender}"
+        puts <<~EOS
+            名前：#{@name}
+            年齢：#{@age}
+            性別：#{@gender}
+        EOS
     end
     
 end
@@ -205,16 +207,16 @@ end
 
 class UserQ18
   # 以下に回答を記載
-    def initialize(user_info)
+    def initialize(**user_info)
         @name = user_info[:name]
         @age = user_info[:age]
     end
     
     def introduce
         if @age >= 20
-            puts "こんにちは，#{@name}と申します。宜しくお願いいたします。"
+            "こんにちは，#{@name}と申します。宜しくお願いいたします。"
         else
-            puts "はいさいまいど〜，#{@name}です！！！"
+            "はいさいまいど〜，#{@name}です！！！"
         end
     end
 end
@@ -230,14 +232,11 @@ end
 
 class Item
   # 以下を修正して下さい
+    attr_reader :name
 
-  def initialize(name)
-    @name = name[:name]
+  def initialize(name:)
+    @name = name
   end
-    
-    def name
-        @name
-    end
     
 end
 
@@ -249,12 +248,38 @@ end
 
 class UserQ20
   # 以下に回答を記載
+    attr_reader :name,:age
+    
+    def initialize(name:,age:)
+        @name = name
+        @age = age
+    end
 
 end
 
 class Zoo
   # 以下に回答を記載
-
+    def initialize(name:,entry_fee:)
+        @entry_fee_infant = entry_fee[:infant]
+        @entry_fee_children = entry_fee[:children]
+        @entry_fee_adult = entry_fee[:adult] 
+        @entry_fee_senior = entry_fee[:senior] 
+    end
+    
+    def info_entry_fee(user)
+        if user.age >= 65 && user.age<=120
+            entry_fee = @entry_fee_senior
+        elsif user.age >= 13
+            entry_fee = @entry_fee_adult
+        elsif user.age >= 6
+            entry_fee = @entry_fee_children
+        elsif user.age >= 0
+            entry_fee = @entry_fee_infant
+        end
+        
+        puts "#{user.name}さんの入場料金は #{entry_fee} 円です。"
+        
+    end
 end
 
 
