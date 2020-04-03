@@ -267,14 +267,16 @@ class Zoo
     end
     
     def info_entry_fee(user)
-        if user.age >= 65 && user.age<=120
-            entry_fee = @entry_fee_senior
-        elsif user.age >= 13
-            entry_fee = @entry_fee_adult
-        elsif user.age >= 6
-            entry_fee = @entry_fee_children
-        elsif user.age >= 0
+        
+        case user.age
+        when 0..5
             entry_fee = @entry_fee_infant
+        when 6..12
+            entry_fee = @entry_fee_children
+        when 13..64
+            entry_fee = @entry_fee_adult
+        when 65..120
+            entry_fee = @entry_fee_senior
         end
         
         puts "#{user.name}さんの入場料金は #{entry_fee} 円です。"
